@@ -1,1 +1,10 @@
-<h1> I AM AN INDEX</h1>
+<h1> I am an index getting rendered through Angular. Nice!</h1>
+
+<nav class="select-boards">
+  Select board:<select>
+    <option ng-repeat="board in boards" value="{{board.id}}">{{board.title}}</option>
+  </select>
+</nav>
+
+{{user}}
+{{boards}}

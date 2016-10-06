@@ -38,6 +38,14 @@ app.config([
         "main-content": {
           templateUrl: "templates/maincontent.html"
         }
+      },
+      resolve: {
+        currentUser: ['Auth', function(Auth){
+          return Auth.currentUser()
+          .then(function(user){
+            return user;
+          });
+        }]
       }
     })
 
