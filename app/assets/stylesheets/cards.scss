@@ -1,3 +1,19 @@
 // Place all the styles related to the cards controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.editable-click {
+  border:none;
+  text-decoration:none;
+  cursor: crosshair;
+}
+
+h4.editable-click {
+  border:none;
+  text-decoration: none;
+  cursor: crosshair;
+}
+
+.card-show {
+  border:1px dotted black;
+}

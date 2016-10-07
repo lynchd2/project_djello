@@ -1,8 +1,9 @@
 class CardsController < ApplicationController
+
   def create
     @card = Card.new
-    @card.title = "New Card Title"
-    @card.description = "New Card Description"
+    @card.title = "New Card Title work!"
+    @card.description = "New Card Description work!"
     @card.list = List.find(params["_json"]);
     if @card.save
       respond_to do |format|

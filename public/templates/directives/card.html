@@ -1,0 +1,28 @@
+<div class="col-md-12 card-show" data-toggle="modal" data-target="#myModal">
+    <strong>Card</strong> Title: {{card.title}}<br>
+    <strong>Description:</strong> {{card.description}}</br></br>
+  <!-- Modal -->
+</div></br></br></br>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 editable-text="card.title" class="modal-title" id="myModalLabel">{{card.title}}</h4>
+        </div>
+        <div editable-text="card.description"  class="modal-body">
+          {{card.description}}
+        </div>
+        <div editable-text=""  class="modal-body">
+          Members go here
+        </div>
+        <div editable-text=""  class="modal-body">
+          Activities go here
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button ng-click="removeCard(card)" type="button" class="btn btn-primary">Mark Completed</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :static_pages, only: [:index]
       resources :boards, only: [:index, :show, :create, :update, :destroy]
       resources :lists, only: [:show, :create, :update, :destroy]
+      resources :cards, only: [:show, :create, :update, :destroy]
     end
   end
 
