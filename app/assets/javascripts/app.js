@@ -1,5 +1,8 @@
-var app = angular.module('app', ['ui.router', "restangular", "Devise"]);
+var app = angular.module('app', ['ui.router', "restangular", "Devise", "xeditable"]);
 
+app.run(function(editableOptions) {
+  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+});
 
 app.factory('_' ['$window', function($window) {
   return $window._;
@@ -45,8 +48,12 @@ app.config([
           .then(function(user){
             return user;
           });
+        }],
+        boards: ["BoardsService", function(BoardsService) {
+          return BoardsService.getBoards();
         }]
       }
+
     })
 
     .state("boards.index", {
@@ -67,5 +74,12 @@ app.config([
           controller: "BoardsShowCtrl"        
         }
       }
+      // ,
+      // resolve: {
+      //   board: ["BoardsService", "$stateParams", function(BoardsService, $stateParams) {
+      //     return BoardsService.findBoard($stateParams.id)
+      //   }]
+      // }
     })
   }])
+

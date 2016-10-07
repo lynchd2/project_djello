@@ -1,6 +1,21 @@
-app.controller("BoardsIndexCtrl", ["$scope", "currentUser", "BoardsService", function($scope, currentUser, BoardsService) {
-  $scope.test = "Hello, Djello!"
-  $scope.user = currentUser;
+app.controller("BoardsIndexCtrl", ["$scope", "currentUser", "BoardsService", "boards", "$state", "$rootScope", function($scope, currentUser, BoardsService, boards, $state, $rootScope) {
 
-  $scope.boards = BoardsService.getBoards();
+  $scope.user = currentUser;
+  $scope.boards = boards;
+  $scope.goToBoard = function(id) {
+    $state.go("boards.show", {id: id})
+  }
+
+  $scope.createBoard = function() {
+    BoardsService.createBoard().then(function(cb) {
+      $rootScope.$broadcast('board.changed');
+    })
+  }
+
+  $scope.$on('board.changed', function(){
+    BoardsService.getBoards().then(function(nb){
+      // angular.copy(nb, $scope.boards);
+    });
+  });
+
 }])

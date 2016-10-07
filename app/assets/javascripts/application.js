@@ -18,4 +18,5 @@
 //= require lodash
 //= require angular-ui-router.min
 //= require restangular.min
+//= require xeditable.min
 //= require_tree .

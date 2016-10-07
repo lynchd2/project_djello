@@ -11,10 +11,10 @@ puts "Getting Master User"
 user = User.first
 3.times do |num|
   puts "Creating board #{num} of 3"
-  board = user.boards.create()
+  board = user.boards.create(title: "New Board #{num}")
   10.times do |num2|
     puts "Creating list #{num2} of 30"
-    board.lists.create()
+    board.lists.create(title: "New Title #{num2}", description: "New Description #{num2}")
     puts "List #{num2} created"
   end
   puts "Board #{num} created with 10 lists"

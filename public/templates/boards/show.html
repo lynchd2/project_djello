@@ -1,6 +1,24 @@
-<h1> I AM A BOARD</h1>
-<div class="select-boards">
-  Select board:<select>
-    <option ng-repeat="board in boards">{{board}}</option>
+<div ng-submit="editTitle(board)">
+  <h1 editable-text="board.title">{{board.title}}</h1>
+</div>
+<nav class="select-boards">
+  Select board:<select ng-model="currentBoardId" ng-click="goToBoard(currentBoardId)">
+    <option ng-repeat="board in boards" value="{{board.id}}">{{board.title}}</option>
   </select>
+</nav>
+<div class="select-boards">
+  <a ng-click="deleteBoard(board)"> Delete Board</a>
+</div>
+
+<div class="container board-list-container">
+  <div class="col-md-12">
+    <list ng-repeat="list in lists | startFrom: currentPage * pageSize | limitTo: pageSize" list="list"></list>
+
+    <div ng-hide="lists" class="pagination-buttons">
+      <button class="btn btn-success" ng-disabled="currentPage == -1" ng-click="currentPage = currentPage-1">Previous</button>
+      {{currentPage+2}}/{{numberOfPages()}}
+
+      <button class="btn btn-success" ng-disabled="currentPage >= 1" ng-click="currentPage = currentPage+1">Next</button>
+    </div>
+  </div>
 </div>
