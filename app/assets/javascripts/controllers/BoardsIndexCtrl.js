@@ -1,7 +1,7 @@
 app.controller("BoardsIndexCtrl", ["$scope", "currentUser", "BoardsService", "boards", "$state", "$rootScope", function($scope, currentUser, BoardsService, boards, $state, $rootScope) {
 
   $scope.user = currentUser;
-  $scope.boards = boards;
+  $scope.boards = BoardsService.getBoardsArray();
   $scope.goToBoard = function(id) {
     $state.go("boards.show", {id: id})
   }
@@ -14,7 +14,7 @@ app.controller("BoardsIndexCtrl", ["$scope", "currentUser", "BoardsService", "bo
 
   $scope.$on('board.changed', function(){
     BoardsService.getBoards().then(function(nb){
-      // angular.copy(nb, $scope.boards);
+      $scope.boards = nb;
     });
   });
 

@@ -1,8 +1,13 @@
-angular.module('app').factory('BoardsService', ['Restangular', function(Restangular){
+angular.module('app').factory('BoardsService', ['Restangular', "$rootScope", function(Restangular, $rootScope){
 
   var _boards = [];
 
   var _board;
+
+
+  var getBoardsArray = function() {
+    return _boards;
+  }
 
 
   var getBoards = function() {
@@ -22,10 +27,11 @@ angular.module('app').factory('BoardsService', ['Restangular', function(Restangu
   };
 
   var deleteBoard = function(board) {
+    var index = _boards.indexOf(board);
     board.remove().then(function() {
-     var index = _boards.indexOf(board);
       if (index > -1) {
         _boards.splice(index, 1);
+        $rootScope.$broadcast('board.change');
       }
     })
   }
@@ -33,6 +39,7 @@ angular.module('app').factory('BoardsService', ['Restangular', function(Restangu
   Restangular.extendModel("boards", function(model) {
     model.edit = function(data) {
       model.patch({board: data});
+      $rootScope.$broadcast('board.changed');
     };
     return model;
   });
@@ -41,7 +48,8 @@ angular.module('app').factory('BoardsService', ['Restangular', function(Restangu
     getBoards: getBoards,
     findBoard: findBoard,
     createBoard: createBoard,
-    deleteBoard: deleteBoard
+    deleteBoard: deleteBoard,
+    getBoardsArray: getBoardsArray
 
   }
 

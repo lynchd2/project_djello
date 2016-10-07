@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161006172001) do
+ActiveRecord::Schema.define(version: 20161007185856) do
 
   create_table "boards", force: :cascade do |t|
     t.string   "title",      default: "New Board"
@@ -18,6 +18,15 @@ ActiveRecord::Schema.define(version: 20161006172001) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.index ["user_id"], name: "index_boards_on_user_id"
+  end
+
+  create_table "cards", force: :cascade do |t|
+    t.string   "title",       default: "New Title Description"
+    t.string   "description", default: "New Card Description"
+    t.integer  "list_id"
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.index ["list_id"], name: "index_cards_on_list_id"
   end
 
   create_table "lists", force: :cascade do |t|

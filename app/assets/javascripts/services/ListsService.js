@@ -1,4 +1,4 @@
-angular.module('app').factory('ListsService', ['Restangular', function(Restangular){ 
+angular.module('app').factory('ListsService', ['Restangular', "$rootScope", function(Restangular, $rootScope){ 
 
   var _lists = [];
 
@@ -8,11 +8,23 @@ angular.module('app').factory('ListsService', ['Restangular', function(Restangul
     })
   }
 
+  var createList = function(board) {
+    var list = {}
+    list.board_id = board.id
+    return Restangular.all("lists").post(board.id).then(function(createdList) {
+      $rootScope.$broadcast('list.changed');
+      _lists.push(createdList);
+    })
+  };
+
   var getLists = function(boardId) {
-    return Restangular.one("boards", id).get().then(function(board) {
-      console.log(board.lists)
+    return Restangular.one("boards", boardId).get().then(function(board) {
       return angular.copy(board.lists, _lists)
     })
+  }
+
+  var getListArray = function() {
+    return _lists;
   }
 
   Restangular.extendModel("lists", function(model) {
@@ -24,7 +36,9 @@ angular.module('app').factory('ListsService', ['Restangular', function(Restangul
 
   return {
     getLists: getLists,
-    findList: findList
+    findList: findList,
+    createList: createList,
+    getListArray: getListArray
   }
 
 

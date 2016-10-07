@@ -1,24 +1,25 @@
-app.controller("BoardsShowCtrl", ["$scope", "BoardsService", "$stateParams", "boards", "$state", "$rootScope", function($scope, BoardsService, $stateParams, boards, $state, $rootScope) {
+app.controller("BoardsShowCtrl", ["$scope", "BoardsService", "$stateParams", "boards", "$state", "ListsService", "$rootScope", function($scope, BoardsService, $stateParams, boards, $state, ListsService, $rootScope) {
   //REMINDER: NEED TO RESOLVE RESTANGULAR OBJECTS IN CONTROLLER, NOT SERVICE
   
 
   //Finding the board and adding pagination
   BoardsService.findBoard($stateParams.id).then(function(board) {
     $scope.board = board;
-    $scope.lists = board.lists;
-    $scope.pageSize = 4;
-    $scope.currentPage = 1;
-    $scope.numberOfPages = function() {
-      return Math.ceil($scope.lists.length / $scope.pageSize)
-    }
+    ListsService.getLists(board.id).then(function(lists) {
+      $scope.lists = lists;
+      $scope.pageSize = 4;
+      $scope.currentPage = 0;
+      $scope.numberOfPages = function() {
+        return Math.ceil($scope.lists.length / $scope.pageSize)
+      }
+    })
   })
 
   $scope.boards = boards;
 
   $scope.deleteBoard = function(board) {
-    BoardsService.deleteBoard(board);
+    BoardsService.deleteBoard(board)
     $rootScope.$broadcast('board.changed');
-    $state.go("boards.index");
   }
 
   
@@ -28,16 +29,23 @@ app.controller("BoardsShowCtrl", ["$scope", "BoardsService", "$stateParams", "bo
 
   $scope.editTitle = function(board) {
     $scope.board.edit($scope.board);
-    $rootScope.$broadcast('board.changed');
   }
 
   $scope.createList = function(board) {
-    ListService.createList();
-  }
+    ListsService.createList($scope.board);
+    $rootScope.$broadcast('list.changed');
+   
+  };
 
   $scope.$on('board.changed', function(){
+    console.log("GET HIT?")
+    $state.go("boards.index")
+    
     BoardsService.getBoards();
   });
 
+  $scope.$on('list.changed', function(){
+    $state.go("boards.show", {id: $scope.board.id});
+  })
 }])
 

@@ -2,11 +2,16 @@ class ListsController < ApplicationController
 
 
   def create
-    @list = List.new(list_params)
-    respond_to do |format|
-      if @list.save
+    @list = List.new
+    @list.title = "New List Title"
+    @list.description = "New List Description"
+    @list.board = Board.find(params["_json"]);
+    if @list.save
+      respond_to do |format|
         format.json{ render json: @list }
-      else
+      end
+    else
+      respond_to do |format|
         format.json{ render json: {error: @list.errors.full_messages.join(', ')} }
       end
     end
@@ -41,6 +46,7 @@ class ListsController < ApplicationController
     end
   end
 
+  private
 
   def list_params
     params.require(:list).permit(:title, :description)
