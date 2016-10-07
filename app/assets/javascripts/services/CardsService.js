@@ -19,14 +19,17 @@ angular.module('app').factory('CardsService', ['Restangular', "$rootScope", func
     })
   };
 
-  var editCard = function(list) {
-    console.log("edit card")
-  }
+
+  Restangular.extendModel("cards", function(model) {
+    model.edit = function(data) {
+      model.patch({card: data});
+    };
+    return model;
+  });
 
 
   return {
     createCard: createCard,
-    editCard: editCard,
     getCards: getCards
   }
 

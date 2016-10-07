@@ -11,19 +11,19 @@
 </div>
 
 
-    <div class="container board-list-container">
-      <div class="col-md-12">
-        <list ng-repeat="list in lists | startFrom: currentPage * pageSize | limitTo: pageSize" list="list"></list>
-        <a ng-show="currentPage + 1 === numberOfPages() && lists.length % 4 !== 0"ng-click="createList()">Add list</a>
-      </div>
-    </div>
-    
-    <div class="pagination-buttons">
-      <a class="center" ng-show="currentPage + 1 === numberOfPages() && lists.length % 4 === 0"ng-click="createList()">Add list</a></br>
-      <a class="center" ng-show="lists.length === 0"ng-click="createList()">Add list</a></br>
-      <button class="btn btn-success" ng-disabled="currentPage == 0" ng-click="currentPage = currentPage-1">Previous</button>
-      {{currentPage + 1}}/{{numberOfPages()}}
+<div class="container board-list-container">
+  <div class="col-md-12">
+    <list ng-repeat="list in lists | startFrom: currentPage * pageSize | limitTo: pageSize" list="list"></list>
+    <a ng-show="currentPage + 1 === numberOfPages() && lists.length % 4 !== 0"ng-click="createList()">Add list</a>
+  </div>
+</div>
 
-      <button class="btn btn-success" ng-disabled="currentPage >= numberOfPages() - 1" ng-click="currentPage = currentPage+1">Next</button>
-    </div>
+<div class="pagination-buttons">
+  <a class="center" ng-show="currentPage + 1 === numberOfPages() && lists.length % 4 === 0"ng-click="createList()">Add list</a></br>
+  <a class="center" ng-show="lists.length === 0"ng-click="createList()">Add list</a></br>
+  <button class="btn btn-success" ng-disabled="currentPage == 0" ng-click="currentPage = currentPage-1">Previous</button>
+  {{currentPage + 1}}/{{numberOfPages()}}
+
+  <button class="btn btn-success" ng-disabled="currentPage >= numberOfPages() - 1" ng-click="currentPage = currentPage+1">Next</button>
+</div>
 

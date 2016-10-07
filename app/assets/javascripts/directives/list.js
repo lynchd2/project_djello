@@ -37,8 +37,8 @@ app.directive("list", ["ListsService", "CardsService", function(ListsService, Ca
         })
       }
 
-      scope.editCard = function() {
-        CardsService.editCard(scope.list)
+      scope.editCard = function(card) {
+        card.edit(card);
       }
 
       scope.card = {title: "Card Title", description: "Card Description"}
