@@ -8,6 +8,12 @@ angular.module('app').factory('CardsService', ['Restangular', "$rootScope", func
     })
   }
 
+  var findCard = function(id) {
+    return Restangular.one("cards", id).get().then(function(card){
+      return card;
+    })
+  }
+
 
   var createCard = function(list) {
     var card = {}
@@ -30,7 +36,8 @@ angular.module('app').factory('CardsService', ['Restangular', "$rootScope", func
 
   return {
     createCard: createCard,
-    getCards: getCards
+    getCards: getCards,
+    findCard: findCard
   }
 
 

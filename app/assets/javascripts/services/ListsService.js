@@ -19,12 +19,13 @@ angular.module('app').factory('ListsService', ['Restangular', "$rootScope", func
 
   var getLists = function(boardId) {
     return Restangular.one("boards", boardId).get().then(function(board) {
-      return angular.copy(board.lists, _lists)
+      return angular.copy(board.lists.reverse(), _lists)
     })
   }
 
   var getListArray = function() {
-    return _lists;
+
+    return _lists
   }
 
   Restangular.extendModel("lists", function(model) {

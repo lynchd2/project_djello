@@ -1,4 +1,4 @@
-app.directive("list", ["ListsService", "CardsService", function(ListsService, CardsService) {
+app.directive("list", ["ListsService", "CardsService", "Restangular", function(ListsService, CardsService, Restangular) {
 
   return {
     restrict: "A",
@@ -38,7 +38,9 @@ app.directive("list", ["ListsService", "CardsService", function(ListsService, Ca
       }
 
       scope.editCard = function(card) {
-        card.edit(card);
+        CardsService.findCard(card.id).then(function(oldCard) {
+          oldCard.edit(card);
+        })
       }
 
       scope.card = {title: "Card Title", description: "Card Description"}

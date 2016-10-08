@@ -1,5 +1,9 @@
-<div ng-submit="editListTitle(list)" class="col-md-3 single-list">
-  <p editable-text="list.title">{{list.title}}</p></br>
-  <p editable-text="list.description">{{list.description}}</p></br>
-  <card ng-repeat="card in cards" card="card" remove-card="removeCard()" edit-card="editCard()">Getting Cards</card>
-  <a ng-click="createCard()" class="btn btn-primary">Add Card</a>
+<div class="col-md-3 single-list">
+  <div ng-submit="editListTitle(list)">
+    <p editable-text="list.title">{{list.title}}</p></br>
+    <p editable-text="list.description">{{list.description}}</p></br>
+  </div>
+    <card ng-repeat="card in cards" card="card" remove-card="removeCard(card)" edit-card="editCard(card)">Getting Cards</card>
+    <a ng-click="createCard()" class="btn btn-primary">Add Card</a>
+  </div>
+</div>

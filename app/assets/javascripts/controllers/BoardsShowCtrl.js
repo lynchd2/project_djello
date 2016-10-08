@@ -6,7 +6,7 @@ app.controller("BoardsShowCtrl", ["$scope", "BoardsService", "$stateParams", "bo
   BoardsService.findBoard($stateParams.id).then(function(board) {
     $scope.board = board;
     ListsService.getLists(board.id).then(function(lists) {
-      $scope.lists = lists;
+      $scope.lists = lists.reverse()
       $scope.pageSize = 4;
       $scope.currentPage = 0;
       $scope.numberOfPages = function() {
@@ -38,9 +38,7 @@ app.controller("BoardsShowCtrl", ["$scope", "BoardsService", "$stateParams", "bo
   };
 
   $scope.$on('board.changed', function(){
-    console.log("GET HIT?")
     $state.go("boards.index")
-    
     BoardsService.getBoards();
   });
 

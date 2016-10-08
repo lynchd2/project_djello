@@ -32,7 +32,7 @@ class ListsController < ApplicationController
       end
     else 
       respond_to do |format| 
-        format.json{}
+        format.json{ render json: {error: @list.errors.full_messages.join(', ')} }
       end
     end
 

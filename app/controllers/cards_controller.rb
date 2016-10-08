@@ -27,7 +27,7 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id])
     if @card.update(card_params) 
       respond_to do |format| 
-        format.json{ render json: @card}
+        format.json{ render json: {error: @card.errors.full_messages.join(', ')} }
       end
     else 
       respond_to do |format| 
@@ -44,4 +44,11 @@ class CardsController < ApplicationController
         format.json{render json: @card}
     end
   end
+
+  private
+
+  def card_params
+    params.require(:card).permit(:title, :description, :list_id)
+  end
+
 end
