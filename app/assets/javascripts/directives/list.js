@@ -15,8 +15,12 @@ app.directive("list", ["ListsService", "CardsService", "Restangular", function(L
       })
 
       scope.removeCard = function(card) {
+        var cardToRemove = card
         if(confirm("Are you sure have completed that task? If so, the card will be removed.")) {
-          
+          Restangular.one("cards", card.id).remove().then(function(response) {
+            angular.element(".modal-backdrop").remove()
+            return scope.cards.splice(scope.cards.indexOf(cardToRemove),1);
+          })
         }
       }
 
