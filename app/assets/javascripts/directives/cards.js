@@ -1,4 +1,4 @@
-app.directive("card", ["ListsService", "CardsService", function(ListsService, CardsService) {
+app.directive("card", ["ListsService", "CardsService","ModalService", function(ListsService, CardsService, ModalService) {
 
   return {
     restrict: "A",
@@ -8,7 +8,19 @@ app.directive("card", ["ListsService", "CardsService", function(ListsService, Ca
       removeCard: "&",
       editCard: "&"
     },
-    link: function(scope) {
+    link: function(scope, element) {
+
+      scope.seeCard = false;
+
+      scope.showCard = function(card, element) {
+        $(element).on("click", function(el) {
+          console.log(card)
+        })
+      }
+
+      scope.open = function() {
+        console.log("DS")
+      }
     }
   }
 }]);

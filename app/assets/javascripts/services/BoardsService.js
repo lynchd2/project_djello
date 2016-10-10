@@ -28,11 +28,10 @@ angular.module('app').factory('BoardsService', ['Restangular', "$rootScope", fun
 
   var deleteBoard = function(board) {
     var index = _boards.indexOf(board);
+    $rootScope.$broadcast('board.delete');
     board.remove().then(function() {
-      if (index > -1) {
-        _boards.splice(index, 1);
-        $rootScope.$broadcast('board.change');
-      }
+      _boards.splice(index, 1);
+      return _boards
     })
   }
 

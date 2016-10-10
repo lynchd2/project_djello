@@ -11,15 +11,18 @@ app.directive("list", ["ListsService", "CardsService", "Restangular", function(L
       scope.cards = []
 
       CardsService.getCards(scope.list.id).then(function(response) {
+        console.log(response)
         return angular.copy(response, scope.cards)
       })
 
       scope.removeCard = function(card) {
         var cardToRemove = card
+        console.log(card.id)
         if(confirm("Are you sure have completed that task? If so, the card will be removed.")) {
           Restangular.one("cards", card.id).remove().then(function(response) {
             angular.element(".modal-backdrop").remove()
-            return scope.cards.splice(scope.cards.indexOf(cardToRemove),1);
+            scope.cards.splice(scope.cards.indexOf(cardToRemove),1);
+            return scope.cards;
           })
         }
       }
@@ -46,8 +49,6 @@ app.directive("list", ["ListsService", "CardsService", "Restangular", function(L
           oldCard.edit(card);
         })
       }
-
-      scope.card = {title: "Card Title", description: "Card Description"}
     }
   }
 

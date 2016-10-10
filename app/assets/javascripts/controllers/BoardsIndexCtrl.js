@@ -1,7 +1,10 @@
 app.controller("BoardsIndexCtrl", ["$scope", "currentUser", "BoardsService", "boards", "$state", "$rootScope", function($scope, currentUser, BoardsService, boards, $state, $rootScope) {
 
   $scope.user = currentUser;
-  $scope.boards = BoardsService.getBoardsArray();
+  //$scope.boards = BoardsService.getBoardsArray();
+  BoardsService.getBoards().then(function(collectedBoards) {
+    $scope.boards = collectedBoards;
+  })
   $scope.goToBoard = function(id) {
     $state.go("boards.show", {id: id})
   }
@@ -17,5 +20,7 @@ app.controller("BoardsIndexCtrl", ["$scope", "currentUser", "BoardsService", "bo
       $scope.boards = nb;
     });
   });
+
+
 
 }])

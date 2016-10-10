@@ -17,6 +17,7 @@
 //= require angular-devise
 //= require lodash
 //= require angular-ui-router.min
+//= require angular-modal-service.min
 //= require restangular.min
 //= require xeditable.min
 //= require_tree .

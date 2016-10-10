@@ -19,7 +19,6 @@ angular.module('app').factory('CardsService', ['Restangular', "$rootScope", func
     var card = {}
     card.list_id = list.id
     return Restangular.all("cards").post(list.id).then(function(createdCard) {
-      //$rootScope.$broadcast('card.created');
       _cards.push(createCard);
       return createdCard;
     })

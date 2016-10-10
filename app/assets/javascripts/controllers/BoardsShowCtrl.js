@@ -19,7 +19,6 @@ app.controller("BoardsShowCtrl", ["$scope", "BoardsService", "$stateParams", "bo
 
   $scope.deleteBoard = function(board) {
     BoardsService.deleteBoard(board)
-    $rootScope.$broadcast('board.changed');
   }
 
   
@@ -37,10 +36,6 @@ app.controller("BoardsShowCtrl", ["$scope", "BoardsService", "$stateParams", "bo
    
   };
 
-  $scope.$on('board.changed', function(){
-    $state.go("boards.index")
-    BoardsService.getBoards();
-  });
 
   $scope.$on('list.changed', function(){
     $state.go("boards.show", {id: $scope.board.id});

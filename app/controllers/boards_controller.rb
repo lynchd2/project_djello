@@ -2,16 +2,16 @@ class BoardsController < ApplicationController
   #before_action :current_user, only: [:update, :destroy]
   
   def index
-    @boards = Board.all.where(user_id: current_user.id)
+    @boards = User.find(current_user.id).boards
     respond_to do |format|
-      format.json{render json: @boards, include: :user}
+      format.json{render json: @boards}
     end
   end
 
   def create
     @board = Board.new()
     @board.title = "Default Title"
-    @board.user = current_user
+    @board.users << current_user
     if @board.save
       respond_to do |format|
         puts "IT SAVED"
@@ -60,7 +60,7 @@ class BoardsController < ApplicationController
   private
 
   def board_params
-    params.require(:board).permit(:title, :user_id)
+    params.require(:board).permit(:title)
   end
 
 end

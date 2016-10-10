@@ -1,6 +1,6 @@
 <div class="col-md-3 single-list">
   <div ng-submit="editListTitle(list)">
-    <p editable-text="list.title">{{list.title}}</p></br>
+    <p editable-text="list.title">{{list.title}}{{list.id}}</p></br>
     <p editable-text="list.description">{{list.description}}</p></br>
   </div>
     <card ng-repeat="card in cards" card="card" remove-card="removeCard(card)" edit-card="editCard(card)">Getting Cards</card>

@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router', "restangular", "Devise", "xeditable"]);
+var app = angular.module('app', ['ui.router', "restangular", "Devise", "xeditable", "angularModalService"]);
 
 app.run(function(editableOptions) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
@@ -39,7 +39,8 @@ app.config([
       abstract: true,
       views: {
         "main-content": {
-          templateUrl: "templates/maincontent.html"
+          templateUrl: "templates/maincontent.html",
+          controller: "BoardsCtrl"
         }
       },
       resolve: {
