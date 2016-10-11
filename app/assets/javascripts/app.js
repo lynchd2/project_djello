@@ -1,8 +1,8 @@
 var app = angular.module('app', ['ui.router', "restangular", "Devise", "xeditable", "angularModalService"]);
 
-app.run(function(editableOptions) {
-  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-});
+// app.run(function(editableOptions) {
+//   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+// });
 
 app.factory('_' ['$window', function($window) {
   return $window._;
