@@ -16,6 +16,14 @@ angular.module('app').factory('BoardsService', ['Restangular', "$rootScope", fun
     }) 
   };
 
+  var addUser = function(userName, board) {
+    Restangular.all('users').customGET("", {param: userName}).then(function(r) {
+      var user = r[0]
+      var id = r[0].id
+      board.edit({user_id: id});
+      $rootScope.$broadcast('get.boardUsers', user);
+    })
+  }
 
   var findBoard = function(id) {
     return Restangular.one("boards", id).get();
@@ -36,6 +44,7 @@ angular.module('app').factory('BoardsService', ['Restangular', "$rootScope", fun
   }
 
   Restangular.extendModel("boards", function(model) {
+    //NOT HERE FOR PATCH 404
     model.edit = function(data) {
       model.patch({board: data});
       $rootScope.$broadcast('board.changed');
@@ -48,7 +57,8 @@ angular.module('app').factory('BoardsService', ['Restangular', "$rootScope", fun
     findBoard: findBoard,
     createBoard: createBoard,
     deleteBoard: deleteBoard,
-    getBoardsArray: getBoardsArray
+    getBoardsArray: getBoardsArray,
+    addUser, addUser
 
   }
 

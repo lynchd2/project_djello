@@ -1,5 +1,19 @@
 <div ng-submit="editTitle(board)">
   <h1 editable-text="board.title">{{board.title}}</h1>
+  <strong>Members of Board:</strong> <div ng-repeat="user in members">
+    <div class='col-md-2'>
+      Username:{{user.username}}</br>
+      Email:{{user.email}}</br></br>
+    </div>
+  </div>
+  <form ng-submit="findUser(userName, board)" class="form">
+    <div class="form-group col-md-4">
+      Add user to board(with username)<input class="form-control" ng-model="userName">
+      <input type="submit" class="btn btn-info">
+    </div>
+  </form>
+
+</div>
 </div>
 <nav class="select-boards">
   Select board:<select ng-model="currentBoardId" ng-click="goToBoard(currentBoardId)">
@@ -10,10 +24,9 @@
   <a ng-click="deleteBoard(board)"> Delete Board</a>
 </div>
 
-
 <div class="container board-list-container">
   <div class="col-md-12">
-    <list ng-repeat="list in lists | startFrom: currentPage * pageSize | limitTo: pageSize" list="list"></list>
+    <list ng-repeat="list in lists | startFrom: currentPage * pageSize | limitTo: pageSize" list="list" members="members"></list>
     <a ng-show="currentPage + 1 === numberOfPages() && lists.length % 4 !== 0"ng-click="createList()">Add list</a>
   </div>
 </div>

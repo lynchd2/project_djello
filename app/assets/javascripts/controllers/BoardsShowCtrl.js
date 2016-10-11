@@ -5,6 +5,7 @@ app.controller("BoardsShowCtrl", ["$scope", "BoardsService", "$stateParams", "bo
   //Finding the board and adding pagination
   BoardsService.findBoard($stateParams.id).then(function(board) {
     $scope.board = board;
+    $scope.members = $scope.board.users
     ListsService.getLists(board.id).then(function(lists) {
       $scope.lists = lists.reverse()
       $scope.pageSize = 4;
@@ -16,6 +17,10 @@ app.controller("BoardsShowCtrl", ["$scope", "BoardsService", "$stateParams", "bo
   })
 
   $scope.boards = boards;
+
+  $scope.$on('get.boardUsers', function(event, data){
+    console.log("DSA")
+  });
 
   $scope.deleteBoard = function(board) {
     BoardsService.deleteBoard(board)
@@ -35,6 +40,10 @@ app.controller("BoardsShowCtrl", ["$scope", "BoardsService", "$stateParams", "bo
     $rootScope.$broadcast('list.changed');
    
   };
+
+  $scope.findUser = function(userName, board) {
+    BoardsService.addUser(userName, board);
+  }
 
 
   $scope.$on('list.changed', function(){

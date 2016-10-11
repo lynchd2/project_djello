@@ -19,10 +19,33 @@ angular.module('app').factory('CardsService', ['Restangular', "$rootScope", func
     var card = {}
     card.list_id = list.id
     return Restangular.all("cards").post(list.id).then(function(createdCard) {
-      _cards.push(createCard);
       return createdCard;
     })
   };
+
+  var addUser = function(card, member) {
+    Restangular.one("cards", card.id).get().then(function(responseCard) {
+      responseCard.edit({id: member});
+    });
+  }
+
+  var removeCard = function(card) {
+      if(confirm("Are you sure have completed that task? If so, the card will be removed.")) {
+        return Restangular.one("cards", card.id).remove().then(function(response) {
+          angular.element(".modal-backdrop").remove()
+          $rootScope.$broadcast("removed.card", response)
+          return response;
+          // scope.cards.splice(scope.cards.indexOf(cardToRemove),1);
+          // return scope.cards;
+        })
+      }
+    }
+
+
+  var getMembers = function(card) {
+    return Restangular.one("cards", card.id).get()
+  }
+
 
 
   Restangular.extendModel("cards", function(model) {
@@ -36,7 +59,10 @@ angular.module('app').factory('CardsService', ['Restangular', "$rootScope", func
   return {
     createCard: createCard,
     getCards: getCards,
-    findCard: findCard
+    findCard: findCard,
+    removeCard: removeCard,
+    addUser: addUser,
+    getMembers: getMembers
   }
 
 

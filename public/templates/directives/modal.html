@@ -1,16 +1,33 @@
-<div class="modal fade">
+<div  class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Yes or No?</h4>
+       <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div ng-submit="editCard(card)">
+          <h4 editable-text="card.title" class="modal-title" id="myModalLabel">{{card.title}}</h4>
+        </div>
+      </div>
+      <div ng-submit="editCard(card)">
+        <p editable-text="card.description" class="modal-body">
+        {{card.description}}
+        </p>
       </div>
       <div class="modal-body">
-        <p>It's your call...</p>
+        <h3 class="text-center">Card Members</h3>
+        <li ng-repeat="member in members">{{member.username}}</li></br>
+        <form ng-submit="submitMember(currentMember)">
+          Select Member to Add:<select ng-model="currentMember">
+            <option ng-repeat="member in memberChoices" value="{{member.id}}">{{member.username}}</option>
+          </select>
+          <input type="submit" class="btn btn-primary">
+        </form>
+      </div>
+      <div class="modal-body">
+        Activities go here
       </div>
       <div class="modal-footer">
-        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">No</button>
-        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes</button>
+        <button ng-click="removeCard(card)" type="button" class="btn btn-primary" data-dismiss-"modal">Mark Complete</button>
+        <button ng-click="close('Cancel')"type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
       </div>
     </div>
   </div>

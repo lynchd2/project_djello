@@ -1,6 +1,6 @@
 class BoardsController < ApplicationController
   #before_action :current_user, only: [:update, :destroy]
-  
+  # Wrap respond to
   def index
     @boards = User.find(current_user.id).boards
     respond_to do |format|
@@ -28,13 +28,15 @@ class BoardsController < ApplicationController
   def show
     @board = Board.find(params[:id])
     respond_to do |format|
-      format.json{ render json: @board, include: :lists}
+      format.json{ render json: @board, include: [:lists, :users]}
     end
   end
 
   def update
     @board = Board.find(params[:id])
+    @user = User.find_by_id(params[:board][:user_id])
     if @board.update(board_params) 
+      @board.users << @user if @user  && !@board.users.include?(@user)
       respond_to do |format| 
         format.json{ render json: @board}
       end
@@ -42,7 +44,7 @@ class BoardsController < ApplicationController
       respond_to do |format| 
         format.json{}
       end
-    end
+   end
 
   end
 

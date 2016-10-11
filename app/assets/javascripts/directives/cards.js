@@ -5,21 +5,24 @@ app.directive("card", ["ListsService", "CardsService","ModalService", function(L
     templateUrl: "templates/directives/card.html",
     scope: {
       card: "=",
-      removeCard: "&",
-      editCard: "&"
+      members: "="
     },
-    link: function(scope, element) {
+    link: function(scope) {
 
-      scope.seeCard = false;
 
-      scope.showCard = function(card, element) {
-        $(element).on("click", function(el) {
-          console.log(card)
-        })
-      }
-
-      scope.open = function() {
-        console.log("DS")
+      scope.showCard = function(card, members) {
+          ModalService.showModal({
+            templateUrl: 'templates/directives/modal.html',
+            controller: "ModalCtrl",
+            inputs: {
+              card: card,
+              members: members
+             }
+        }).then(function(modal) {
+            modal.element.modal();
+            // modal.close.then(function() {
+            // });
+        });
       }
     }
   }

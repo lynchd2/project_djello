@@ -24,7 +24,6 @@ angular.module('app').factory('ListsService', ['Restangular', "$rootScope", func
   }
 
   var getListArray = function() {
-
     return _lists
   }
 

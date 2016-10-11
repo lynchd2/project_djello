@@ -19,13 +19,15 @@ class CardsController < ApplicationController
   def show
     @card = Card.find(params[:id])
     respond_to do |format|
-      format.json{ render json: @card}
+      format.json{ render json: @card, include: :users}
     end
   end
 
   def update
     @card = Card.find(params[:id])
+    @user = User.find_by_id(params[:card][:id])
     if @card.update(card_params) 
+      @card.users << @user if @user && !@card.users.to_a.include?(@user)
       respond_to do |format| 
         format.json{ render json: {error: @card.errors.full_messages.join(', ')} }
       end
@@ -48,7 +50,7 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card).permit(:title, :description, :list_id)
+    params.require(:card).permit(:title, :description, :list_id, :member_id)
   end
 
 end
