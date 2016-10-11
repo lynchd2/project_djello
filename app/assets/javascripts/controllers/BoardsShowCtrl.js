@@ -42,7 +42,18 @@ app.controller("BoardsShowCtrl", ["$scope", "BoardsService", "$stateParams", "bo
   };
 
   $scope.findUser = function(userName, board) {
-    BoardsService.addUser(userName, board);
+    BoardsService.addUser(userName, board).then(function(userAdded) {
+      var found = false;
+        for(var i = 0; i < $scope.members.length; i++) {
+          if ($scope.members[i].id == userAdded.id) {
+          found = true;
+          break;
+        }
+      }
+      if(!found) {
+        $scope.members.push(userAdded)
+      }
+    })
   }
 
 

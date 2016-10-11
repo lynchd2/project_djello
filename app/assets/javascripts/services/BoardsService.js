@@ -17,12 +17,16 @@ angular.module('app').factory('BoardsService', ['Restangular', "$rootScope", "$h
   };
 
   var addUser = function(userName, board) {
-    Restangular.all('users').customGET("", {param: userName}).then(function(r) {
-      var user = r[0]
+    var user;
+    return Restangular.all('users').customGET("", {param: userName}).then(function(r) {
+      user = r[0]
       var id = r[0].id
       board.edit({user_id: id});
       $rootScope.$broadcast('get.boardUsers', user);
+      console.log(user)
+      return user
     })
+
   }
 
   var findBoard = function(id) {

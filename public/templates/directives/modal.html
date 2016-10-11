@@ -17,7 +17,7 @@
         <li ng-repeat="member in members">{{member.username}}</li></br>
         <form ng-submit="submitMember(currentMember)">
           Select Member to Add:<select ng-model="currentMember">
-            <option ng-repeat="member in memberChoices" value="{{member.id}}">{{member.username}}</option>
+            <option ng-repeat="member in memberChoices" value="{{member}}">{{member.username}}</option>
           </select>
           <input type="submit" class="btn btn-primary">
         </form>
