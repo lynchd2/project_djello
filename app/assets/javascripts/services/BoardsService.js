@@ -1,4 +1,4 @@
-angular.module('app').factory('BoardsService', ['Restangular', "$rootScope", function(Restangular, $rootScope){
+angular.module('app').factory('BoardsService', ['Restangular', "$rootScope", "$http", function(Restangular, $rootScope, $http){
 
   var _boards = [];
 

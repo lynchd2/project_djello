@@ -1,4 +1,4 @@
-angular.module('app').factory('ListsService', ['Restangular', "$rootScope", function(Restangular, $rootScope){ 
+angular.module('app').factory('ListsService', ['Restangular', "$rootScope", "$http", function(Restangular, $rootScope, $http){ 
 
   var _lists = [];
 
