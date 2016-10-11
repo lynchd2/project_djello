@@ -28,7 +28,7 @@ app.config([
 ]);
 
 app.config([
-  '$urlRouterProvider', '$stateProvider',  function($stateProvider, $urlRouterProvider) {
+  '$urlRouterProvider', '$stateProvider',  function($urlRouterProvider, $stateProvider) {
 
     $urlRouterProvider.otherwise("/boards")
 
