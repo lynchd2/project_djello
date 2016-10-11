@@ -44,13 +44,13 @@ app.config([
         }
       },
       resolve: {
-        currentUser: ['Auth', function(Auth){
+        currentUser: ['Auth', "$http", function(Auth, $http){
           return Auth.currentUser()
           .then(function(user){
             return user;
           });
         }],
-        boards: ["BoardsService", function(BoardsService) {
+        boards: ["BoardsService", "$http", function(BoardsService, $http) {
           return BoardsService.getBoards();
         }]
       }
@@ -82,5 +82,7 @@ app.config([
       //   }]
       // }
     })
+
+
   }])
 
