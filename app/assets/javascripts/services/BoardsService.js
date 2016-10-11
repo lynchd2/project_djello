@@ -58,7 +58,7 @@ angular.module('app').factory('BoardsService', ['Restangular', "$rootScope", fun
     createBoard: createBoard,
     deleteBoard: deleteBoard,
     getBoardsArray: getBoardsArray,
-    addUser, addUser
+    addUser: addUser
 
   }
 
