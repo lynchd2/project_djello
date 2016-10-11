@@ -1,5 +1,6 @@
 <div class="col-md-3 single-list">
   <div ng-submit="editListTitle(list)">
+    <a ng-click="removeList(list)">Click to remove list</a>
     <p editable-text="list.title">{{list.title}}{{list.id}}</p></br>
     <p editable-text="list.description">{{list.description}}</p></br>
   </div>

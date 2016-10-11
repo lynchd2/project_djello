@@ -23,6 +23,12 @@ angular.module('app').factory('ListsService', ['Restangular', "$rootScope", "$ht
     })
   }
 
+  var removeList = function(list) {
+    return Restangular.one("lists", list.id).get().then(function(list) {
+      return list.remove(); 
+    })
+  }
+
   var getListArray = function() {
     return _lists
   }
@@ -38,7 +44,8 @@ angular.module('app').factory('ListsService', ['Restangular', "$rootScope", "$ht
     getLists: getLists,
     findList: findList,
     createList: createList,
-    getListArray: getListArray
+    getListArray: getListArray,
+    removeList: removeList
   }
 
 

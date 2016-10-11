@@ -26,7 +26,7 @@
 
 <div class="container board-list-container">
   <div class="col-md-12">
-    <list ng-repeat="list in lists | startFrom: currentPage * pageSize | limitTo: pageSize" list="list" members="members"></list>
+    <list ng-repeat="list in lists | startFrom: currentPage * pageSize | limitTo: pageSize" list="list" members="members" remove-list="removeList(list)"></list>
     <a ng-show="currentPage + 1 === numberOfPages() && lists.length % 4 !== 0"ng-click="createList()">Add list</a>
   </div>
 </div>

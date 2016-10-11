@@ -41,6 +41,15 @@ app.controller("BoardsShowCtrl", ["$scope", "BoardsService", "$stateParams", "bo
    
   };
 
+
+  $scope.removeList = function(list) {
+    ListsService.removeList(list).then(function() {
+      var index = $scope.lists.indexOf(list)
+      $scope.lists.splice(index,1)
+    })
+  }
+
+
   $scope.findUser = function(userName, board) {
     BoardsService.addUser(userName, board).then(function(userAdded) {
       var found = false;

@@ -5,7 +5,8 @@ app.directive("list", ["ListsService", "CardsService", "Restangular", function(L
     templateUrl: "templates/directives/list.html",
     scope: {
       list: "=",
-      members: "="
+      members: "=",
+      removeList: "&"
     },
     link: function(scope) {
 
